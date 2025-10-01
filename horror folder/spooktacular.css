@@ -202,43 +202,194 @@ body::before {
 }
 
 
-.nav-button {
-  display: inline-block;
-  background: linear-gradient(to right, #ff6b08, #ff4500);
-  color: white;
-  padding: 0.8rem 1.8rem;
-  border-radius: 50px;
+.spooky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 40px;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  z-index: 999;
+  border-bottom: 2px solid crimson;
+}
+
+.spooky-header .logo {
+  font-family: 'Creepster', cursive;
+  font-size: 2rem;
+  color: crimson;
+  text-shadow: 0 0 15px red, 0 0 30px darkred;
+  animation: pulse 4s infinite;
+}
+
+.spooky-header .spooky-link {
+  font-family: 'Special Elite', serif;
+  color: #fff;
+  font-size: 1.2rem;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 12px rgba(255, 107, 8, 0.4);
-  transition: all 0.3s ease;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.spooky-header .spooky-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: crimson;
+  transition: width 0.4s ease;
+}
+
+.spooky-header .spooky-link:hover {
+  color: crimson;
+}
+
+.spooky-header .spooky-link:hover::after {
+  width: 100%;
+}
+
+.hero-section {
+  margin-top: 120px; /* leave space for fixed header */
+  text-align: center;
+  padding: 100px 20px;
+  position: relative;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-family: 'Creepster', cursive;
+  color: crimson;
+  text-shadow: 0 0 20px red, 0 0 50px black;
+  animation: flicker 3s infinite;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: #eee;
+  margin-top: 10px;
+  font-family: 'Special Elite', serif;
+  letter-spacing: 2px;
+}
+
+.scary-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  color: #fff;
+  background: linear-gradient(to bottom, #7a0000, #300000);
+  border: 3px solid crimson;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-family: 'Creepster', cursive;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-shadow: 0 0 10px crimson, 0 0 20px darkred;
+  box-shadow: 0 0 30px rgba(139, 0, 0, 0.8);
   position: relative;
   overflow: hidden;
-  border: none;
-  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s;
+  animation: shake 5s infinite ease-in-out;
 }
 
-.nav-button::before {
-  content: "";
+.scary-button::before,
+.scary-button::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 20px;
+  background: crimson;
+  bottom: 100%;
+  border-radius: 50%;
+  animation: blood-drip 3s infinite;
+}
+
+.scary-button::after {
+  left: 70%;
+  animation-delay: 1.5s;
+}
+
+.scary-button:hover {
+  transform: scale(1.1) rotate(-2deg);
+  box-shadow: 0 0 50px crimson, 0 0 100px darkred;
+  background: linear-gradient(to bottom, #a00000, #400000);
+}
+
+@keyframes blood-drip {
+  0% { bottom: 100%; opacity: 0; }
+  40% { bottom: -10px; opacity: 1; }
+  100% { bottom: 120%; opacity: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate(-2px, 2px); }
+  20%, 40%, 60%, 80% { transform: translate(2px, -2px); }
+}
+
+.scratch-container {
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: 0.5s;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.nav-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(255, 107, 8, 0.6);
+.scratch {
+  position: absolute;
+  width: 120px;
+  height: 2px;
+  background: crimson;
+  box-shadow: 0 0 10px darkred, 0 0 20px black;
+  transform: rotate(-15deg) scaleX(0);
+  opacity: 0;
+  animation: scratch-appear 8s infinite;
 }
 
-.nav-button:hover::before {
-  left: 100%;
+.scratch:nth-child(1) {
+  top: 20%;
+  left: 15%;
+  animation-delay: 1s;
 }
 
-.nav-button:active {
-  transform: translateY(-1px);
+.scratch:nth-child(2) {
+  top: 50%;
+  left: 60%;
+  transform: rotate(20deg) scaleX(0);
+  animation-delay: 3s;
+}
+
+.scratch:nth-child(3) {
+  top: 75%;
+  left: 30%;
+  transform: rotate(-10deg) scaleX(0);
+  animation-delay: 5s;
+}
+
+@keyframes scratch-appear {
+  0% {
+    opacity: 0;
+    transform: scaleX(0) rotate(-15deg);
+  }
+  10% {
+    opacity: 1;
+    transform: scaleX(1) rotate(-15deg);
+  }
+  40% {
+    opacity: 1;
+    transform: scaleX(1.2) rotate(-15deg);
+  }
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0) rotate(-15deg);
+  }
+}
