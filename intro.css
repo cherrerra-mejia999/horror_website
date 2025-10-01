@@ -1,0 +1,101 @@
+:root {
+  --pumpkin: #FF7518;
+  --witch-purple: #4B0082;
+  --monster-green: #228B22;
+  --black: #000000;
+  --ghost: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(180deg, #000 0%, #111 100%);
+  color: var(--ghost);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x: hidden;
+}
+
+/* Foggy background effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 10%, transparent 70%);
+  background-size: 200% 200%;
+  animation: fog 15s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes fog {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+header {
+  text-align: center;
+  font-family: 'Creepster', cursive;
+  font-size: 2.5rem;
+  color: var(--pumpkin);
+  padding: 20px;
+  text-shadow: 0 0 10px var(--witch-purple), 0 0 20px var(--monster-green);
+  z-index: 2;
+}
+
+.table-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  border-collapse: collapse;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 20px var(--witch-purple), 0 0 40px var(--monster-green);
+  width: 60%;
+  z-index: 2;
+}
+
+th, td {
+  padding: 15px;
+  border: 1px solid var(--pumpkin);
+}
+
+th {
+  background-color: var(--witch-purple);
+  color: var(--ghost);
+  font-family: 'Creepster', cursive;
+  font-size: 1.3rem;
+}
+
+tr:hover {
+  background-color: rgba(255, 117, 24, 0.2);
+  transition: background 0.3s;
+}
+
+footer {
+  text-align: center;
+  padding: 15px;
+  font-family: 'Creepster', cursive;
+  color: var(--monster-green);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+footer a {
+  color: var(--pumpkin);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+footer a:hover {
+  color: var(--ghost);
+  text-shadow: 0 0 10px var(--pumpkin);
+}
+
